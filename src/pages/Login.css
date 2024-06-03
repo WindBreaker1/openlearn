@@ -1,0 +1,9 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
+}
+
+/* login forms and fields are customized in Register.css */

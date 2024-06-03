@@ -1,0 +1,39 @@
+#daily-exercise-page {
+  margin-bottom: 100px;
+}
+
+#daily-exercise-page input {
+  margin: 0 10px 0 10px;
+  max-width: fit-content;
+}
+
+.exercise-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 20px;
+  margin-top: 50px;
+  padding: 0 20px 20px 20px;
+  border-radius: 10px;
+  background-color: #434343bb;
+  line-height: 2.5rem;
+}
+
+.exercise-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.exercise-container input {
+  height: 15px;
+  border: none;
+  background-color: #525252;
+}
+
+.exercise-submit:disabled {
+  cursor: not-allowed;
+  background-color: #5a832ebb;
+  color: #ffffff;
+}

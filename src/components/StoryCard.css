@@ -1,0 +1,16 @@
+.story-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  gap: 20px;
+  padding: 10px;
+  border: 1px solid #6b6b6b;
+  border-radius: 10px;
+}
+
+.story-card-image {
+  width: 100px;
+  border-radius: 50%;
+}

@@ -1,0 +1,62 @@
+.survey-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.survey-page p {
+  text-align: center;
+  padding: 0 300px 0 300px;
+}
+
+.register-for-survey {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.general-survey-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #0876a5;
+  border-radius: 5px;
+  background-color: #21252f;
+  margin-bottom: 50px;
+}
+
+#survey-form {
+  margin-top: 50px;
+}
+
+.survey-form-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  text-align: left;
+}
+
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  margin-bottom: 50px;
+  border: 1px solid #0876a5;
+  border-radius: 5px;
+  background-color: #21252f;
+}

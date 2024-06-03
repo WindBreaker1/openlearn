@@ -1,0 +1,38 @@
+.long-card {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 20px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  line-height: 2;
+}
+
+.long-card:hover {
+  background-color: #36363680;
+}
+
+.long-card .icon {
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.lg-icon {
+  font-size: 0px;
+}
+
+.lg-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.lg-title {
+  margin-top: 0; /* Remove default margin */
+  margin-bottom: 0;
+}
+
+.lg-description {
+  margin-bottom: 0; /* Remove default margin */
+}

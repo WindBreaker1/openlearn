@@ -1,0 +1,186 @@
+/* font imports */  
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+
+/* general css */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: "Ubuntu", sans-serif; */
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #5494e9;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #2b5ca9;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0px;
+  padding: 0px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #2b5ca9;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  background-color: #1c3b6e;
+}
+button:focus {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+input {
+  border-radius: 8px;
+  border: 1px solid #d1d1d1;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-family: inherit;
+}
+
+input:hover {
+  background-color: #4e4e4e80;
+}
+
+
+/* tables */
+
+table {
+  width: 100%;
+  border: 1px solid #ffffff9b;
+  border-collapse: collapse;
+  margin: 40px 0 40px 0;
+  padding: 10px;
+}
+
+/* Style the table header */
+thead {
+  background-color: #313131;
+}
+
+/* Style the table header cells */
+th {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  white-space: normal;
+}
+
+/* Style the table body cells */
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  white-space: normal;
+}
+
+/* Style the table rows on hover */
+tr:hover {
+  background-color: #3a3a3a;
+}
+
+/* Style for unordered lists */
+ul {
+  list-style-type: circle; /* Change the bullet points to circles */
+  padding-left: 20px; /* Add some padding to the left of the list */
+}
+
+/* Style for ordered lists */
+ol {
+  list-style-type: decimal; /* Use numbers for the list items */
+  padding-left: 20px; /* Add some padding to the left of the list */
+}
+
+/* Style for list items */
+li {
+  line-height: 1.5; /* Increase the line height */
+  margin-bottom: 10px; /* Add some margin to the bottom of each list item */
+}
+
+code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+/* page css */
+.page {
+  /* center page text */
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  text-align: left;
+  padding: 0 20% 0 20%;
+  margin-bottom: 60px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 40px 0 20px 0;
+}
+
+.inline-code {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  background-color: #4e4e4e80;
+  color: #ff4444;
+}
+
+.confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(50%, 50%);
+}
+
+/* responsive stuff */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

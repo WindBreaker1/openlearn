@@ -1,0 +1,20 @@
+.exp-button {
+  background-color: #4d4d4d;
+  text-align: center;
+  font-size: 16px;
+}
+
+.exp-button:hover {
+  background-color: #3b563b;
+}
+
+.exp-button.clicked {
+  background-color: #259825;
+  transition: background-color 0.5s linear;
+}
+
+.exp-button:disabled {
+  background-color: #259825;
+  color: #fff;
+  cursor: not-allowed; /* Change the cursor to a 'not allowed' cursor */
+}
