@@ -58,6 +58,29 @@ export default function Dashboard() {
         </div>
       )}
       {/* if user is logged in, display the stuff below */}
+      {!!user && user.isAdmin === true && (
+        <div className="dashboard-logged-in">
+          <div className="account-info">
+            <h1>😎 Admin Panel</h1>
+          </div>
+          <div className="account-info">
+            <p>Add new lessons.</p>
+            <Link to='/add-lesson'><button>Add Lesson</button></Link>
+          </div>
+          <div className="account-info">
+            <p>View all lessons.</p>
+            <Link to='/admin-lessons'><button>View Lessons</button></Link>
+          </div>
+          <div className="account-info">
+            <p>Add daily questions.</p>
+            <Link to='/add-daily'><button>Add Daily Question</button></Link>
+          </div>
+          <div className="account-info">
+            <p>View daily questions.</p>
+            <Link to='/admin-daily'><button>View Daily Questions</button></Link>
+          </div>
+        </div>
+      )}
       {!!user && (
         <div className="dashboard-logged-in">
           <div className="account-info">

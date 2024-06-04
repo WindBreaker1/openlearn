@@ -18,7 +18,7 @@ export default function Footer() {
             </a>
           </li>
           <li>
-            <a href="http://github.com" target="_blank" rel="noopener noreferrer">
+            <a href="http://github.comhttps://github.com/WindBreaker1/openlearn" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faGithub}  className="icon" id="github-icon" />
             </a>
           </li>

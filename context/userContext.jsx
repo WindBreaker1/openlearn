@@ -8,6 +8,8 @@ export const UserContext = createContext({});
 export function UserContextProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [exercises, setExercises] = useState([]);
+  const [lessons, setLessons] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [language, setLanguage] = useState('');
 
@@ -57,9 +59,37 @@ export function UserContextProvider({ children }) {
     }
   };
 
+  // fetching exercises
+  useEffect(() => {
+    const fetchExercises = async () => {
+      try {
+        const response = await axios.get('/getDailyExercises');
+        setExercises(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchExercises();
+  }, []);
+
+  // fetching lessons
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        const response = await axios.get('/getLessons');
+        setLessons(response.data);
+      } catch (error) {
+        toast.error('Failed to fetch lessons');
+      }
+    };
+    fetchLessons();
+  }, []);
+
   return (
     <UserContext.Provider value={{
       user, setUser, 
+      exercises, setExercises,
+      lessons, setLessons,
       answers, setAnswers, 
       language, setLanguage, 
       logOut, calculateStreak, addExp }}>

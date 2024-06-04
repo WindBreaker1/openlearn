@@ -1,5 +1,5 @@
 import './DailyExercise.css';
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 import { UserContext } from '../../context/userContext';
@@ -20,123 +20,58 @@ const config = {
   colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
 };
 
-export default function DailyExercise() {
-  document.title = 'Daily Exercise';
+export default function DailyExercise2() {
+  const { exercises, setExercises, addExp, calculateStreak } = useContext(UserContext);
+  const [dailyExercise, setDailyExercise] = useState(null);
+  const [userAnswer, setUserAnswer] = useState('');
 
-  const { addExp, calculateStreak } = useContext(UserContext);
   const [confetti, setConfetti] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  const [answer, setAnswer] = useState('');
+  useEffect(() => {
+    const date = new Date();
+    const seed = date.getFullYear() * 10000 + (date.getMonth() + 1) * 100 + date.getDate();
+    const random = Math.sin(seed) * 10000;
+    const index = Math.floor((random - Math.floor(random)) * exercises.length);
+    setDailyExercise(exercises[index]);
+  }, [exercises]);
 
-  const [day, setDay] = useState(() => {
-    const today = new Date().toDateString();
-    const savedDay = localStorage.getItem('day');
-    const savedDate = localStorage.getItem('date');
-    if (savedDay && savedDate === today) {
-      return Number(savedDay);
-    } else {
-      const newDay = Math.floor(Math.random() * 4) + 1;
-      localStorage.setItem('day', newDay);
-      localStorage.setItem('date', today);
-      return newDay;
-    }
-  });
-
-  const handleExerciseLogic = () => {
-    toast.success("Correct answer! You have completed today's exercise!");
-    addExp();
-    calculateStreak();
-    setConfetti(true);
-    setTimeout(() => setConfetti(false), 3000);
-    setIsClicked(!isClicked);
-  }
-  
   const handleSubmit = (e) => {
     e.preventDefault();
-    // exercise 1
-    if (day === 1) {
-      if (answer.toLowerCase() === 'variables' || answer.toLowerCase() === 'variable') {
-        handleExerciseLogic();
-      } else {
-        toast.error("Incorrect answer, try again. Check your spelling!");
-      }
+    if (userAnswer === dailyExercise.answer) {
+      addExp();
+      calculateStreak();
+      setConfetti(true);
+      setTimeout(() => setConfetti(false), 3000);
+      setIsClicked(!isClicked);
+      toast.success("Correct answer! You have completed today's exercise!");
+    } else {
+      toast.error("Incorrect answer, try again. Check your spelling!");
     }
-    //exercise 2
-    if (day === 2) {
-      if (answer.toLowerCase() === 'functions' || answer.toLowerCase() === 'function') {
-        handleExerciseLogic();
-      } else {
-        toast.error("Incorrect answer, try again. Check your spelling!");
-      }
-    }
-    //exercise 3
-    if (day === 3) {
-      if (answer.toLowerCase() === 'arrays' || answer.toLowerCase() === 'array') {
-        handleExerciseLogic();
-      } else {
-        toast.error("Incorrect answer, try again. Check your spelling!");
-      }
-    }
-    //exercise 4
-    if (day === 4) {
-      if (answer.toLowerCase() === 'objects' || answer.toLowerCase() === 'object') {
-        handleExerciseLogic();
-      } else {
-        toast.error("Incorrect answer, try again. Check your spelling!");
-      }
-    }
+  };
+
+  if (!dailyExercise) {
+    return <div>Loading...</div>;
   }
-  
+
   return (
-    <div className='page' id='daily-exercise-page'>
+    <div className='page'>
       <h1><FontAwesomeIcon icon={faCalendarCheck} style={{color: "#3f932f",}} /> Daily Exercise</h1>
       <p>Here is today's exercise. Complete one every day to increase your streak!</p>
-      {/* Exercise 1 */}
-      {day === 1 && (
+      <p>Answers are written using lowercase characters. Remember to check your spelling!</p>
       <div className='exercise-container'>
-        <h2>What do you use to store data in JavaScript?</h2>
+        <h2>{dailyExercise.questionText}</h2>
         <form onSubmit={handleSubmit}>
-          <div>In JavaScript, <input type="text" value={answer} onChange={e => setAnswer(e.target.value)} placeholder="Answer goes here..." /> are used to store information that can be referenced and manipulated in your code.</div>
+          <input
+            type="text"
+            value={userAnswer}
+            onChange={(e) => setUserAnswer(e.target.value)}
+            placeholder="Your answer"
+          />
           <Confetti className='confetti' active={confetti} config={config} />
-          <button className='exercise-submit' disabled={isClicked} type="submit">Submit</button>
+          <button className='exercise-submit' type="submit" disabled={isClicked}>Submit</button>
         </form>
       </div>
-      )}
-      {/* Exercise 2 */}
-      {day === 2 && (
-      <div className="exercise-container">
-        <h2>What do you use to group code together in JavaScript?</h2>
-        <form onSubmit={handleSubmit}>
-          <div>In JavaScript, <input type="text" value={answer} onChange={e => setAnswer(e.target.value)} placeholder="Answer goes here..." /> are used to group code together and execute it when called.</div>
-          <Confetti className='confetti' active={confetti} config={config} />
-          <button className='exercise-submit' disabled={isClicked} type="submit">Submit</button>
-        </form>
-      </div>
-      )}
-      {/* Exercise 3 */}
-      {day === 3 && (
-      <div className="exercise-container">
-        <h2>What do you use to store multiple values in JavaScript?</h2>
-        <form onSubmit={handleSubmit}>
-          <div>In JavaScript, <input type="text" value={answer} onChange={e => setAnswer(e.target.value)} placeholder="Answer goes here..." /> are used to store multiple values in a single variable.</div>
-          <Confetti className='confetti' active={confetti} config={config} />
-          <button className='exercise-submit' disabled={isClicked} type="submit">Submit</button>
-        </form>
-      </div>
-      )}
-      {/* Exercuse 4 */}
-      {day === 4 && (
-      <div className="exercise-container">
-        <h2>What do you use to store more complex data in JavaScript?</h2>
-        <form onSubmit={handleSubmit}>
-          <div>In JavaScript, <input type="text" value={answer} onChange={e => setAnswer(e.target.value)} placeholder="Answer goes here..." /> are used to store data in key-value pairs.</div>
-          <Confetti className='confetti' active={confetti} config={config} />
-          <button className='exercise-submit' disabled={isClicked} type="submit">Submit</button>
-        </form>
-      </div>
-      )}
-      {/* Exercise 5 */}
     </div>
-  )
+  );
 }

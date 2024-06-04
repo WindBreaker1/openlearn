@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { isValidElement, useState } from "react";
 import axios from "axios"
 import {toast} from "react-hot-toast"
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ export default function Register() {
     name: '',
     email: '',
     password: '',
+    isAdmin: false,
     image: '',
     experience: 0,
     level: 1,
@@ -28,12 +29,12 @@ export default function Register() {
     // This makes it so the page doesn't load instantly.
     e.preventDefault();
     // de-structuring the data
-    const {name, email, password, image, experience, level, rank, streak, bestStreak,} = data;
+    const {name, email, password, isAdmin, image, experience, level, rank, streak, bestStreak,} = data;
     // sending the data to the backend when user registers
     try {
       const {data} = await axios.post('/register', {
         // information sent to the backend
-        name, email, password, image, experience, level, rank, streak, bestStreak,
+        name, email, password, isAdmin, image, experience, level, rank, streak, bestStreak,
       });
       // if there is an error with the data we're sending, show a notification
       if (data.error) {

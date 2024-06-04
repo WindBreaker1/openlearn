@@ -4,10 +4,10 @@ OpenLearn is a website for free, open-source learning resources focused on progr
 
 ## To-Do's
 
-- [ ] Written thesis.
-- [ ] Link to github in Contribute page.
-- [ ] Export to github.
 - [ ] change .env with template passwords when I need to send it
+- [ ] Written thesis.
+- [x] Link to github in Contribute page.
+- [x] Export to github.
 - [x] More comments in code.
 - [x] JavaScript course with 4 lessons.
 - [x] Better dashboard.

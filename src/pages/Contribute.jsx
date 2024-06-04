@@ -25,7 +25,9 @@ export default function Contribute() {
         <p>
           Contribute to the website and the curriculum through our GitHub repository. We are always looking for new lessons, projects, and resources to add to the curriculum.
         </p>
-        <button><FontAwesomeIcon icon={faGithub} /> Contribute</button>
+        <a href="https://github.com/WindBreaker1/openlearn" target="_blank" rel="noopener noreferrer">
+          <button><FontAwesomeIcon icon={faGithub} /> Contribute</button>
+        </a>
         <br />
       </div>
       <div className="donation-section">

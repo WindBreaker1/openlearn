@@ -24,6 +24,12 @@ import Dashboard from './pages/Dashboard'
 import Curriculum from './pages/Curriculum'
 import Survey from './pages/Survey'
 import DailyExercise from './pages/DailyExercise'
+import AddDaily from './pages/AddDaily'
+import AdminDaily from './pages/AdminDaily'
+import AddLesson from './pages/AddLesson'
+import UpdateLesson from './pages/UpdateLesson'
+import AdminLessons from './pages/AdminLessons'
+import LessonPage from './pages/LessonPage'
 import Ledearboard from './pages/Leaderboard'
 import NotFoundPage from './pages/NotFoundPage'
 // importam cursurile
@@ -42,11 +48,6 @@ import SwiftCourseHome from './pages/Courses/Swift/SwiftCourseHome'
 import RustCourseHome from './pages/Courses/Rust/RustCourseHome'
 import KotlinCourseHome from './pages/Courses/Kotlin/KotlinCourseHome'
 import GoCourseHome from './pages/Courses/Go/GoCourseHome'
-// importam lectiile JavaScript
-import JSLesson1 from './pages/Courses/JavaScript/JSLesson1'
-import JSLesson2 from './pages/Courses/JavaScript/JSLesson2'
-import JSLesson3 from './pages/Courses/JavaScript/JSLesson3'
-import JSLesson4 from './pages/Courses/JavaScript/JSLesson4'
 
 // ============================= APP COMPONENT =============================== //
 
@@ -82,6 +83,12 @@ function App() {
           <Route path='/curriculum' element={<Curriculum />} />
           <Route path='/survey' element={<Survey />} />
           <Route path='/daily-exercise' element={<DailyExercise />} />
+          <Route path='/add-daily' element={<AddDaily />} />
+          <Route path='/admin-daily' element={<AdminDaily />} />
+          <Route path='/add-lesson' element={<AddLesson />} />
+          <Route path='/update-lesson/:id' element={<UpdateLesson />} />
+          <Route path='/admin-lessons' element={<AdminLessons />} />
+          <Route path="/lessons/:id" element={<LessonPage />} />
           <Route path='/leaderboard' element={<Ledearboard />} />
           <Route path='*' element={<NotFoundPage />} />
           {/* cursurile */}
@@ -100,11 +107,6 @@ function App() {
           <Route path='/curriculum/rust' element={<RustCourseHome />} />
           <Route path='/curriculum/kotlin' element={<KotlinCourseHome />} />
           <Route path='/curriculum/go' element={<GoCourseHome />} />
-          {/* cursul JavaScript */}
-          <Route path='/curriculum/javascript/lesson-1' element={<JSLesson1 />} />
-          <Route path='/curriculum/javascript/lesson-2' element={<JSLesson2 />} />
-          <Route path='/curriculum/javascript/lesson-3' element={<JSLesson3 />} />
-          <Route path='/curriculum/javascript/lesson-4' element={<JSLesson4 />} />
         </Routes>
         <Footer />
       </UserContextProvider>

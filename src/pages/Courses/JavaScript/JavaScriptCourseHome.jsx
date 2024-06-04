@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faJs } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
@@ -5,7 +7,24 @@ import { Link } from 'react-router-dom';
 
 const JavaScriptCourseHome = () => {
   document.title = 'JavaScript Course';
+
+  const [lessons, setLessons] = useState([]);
   
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        const response = await axios.get('/getLessons');
+        const jsLessons = response.data
+          .filter(lesson => lesson.language === 'JavaScript')
+          .sort((a, b) => a.order - b.order);
+        setLessons(jsLessons);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLessons();
+  }, []);
+
   return (
     <div className='page'>
       {/* introduction */}
@@ -31,26 +50,20 @@ const JavaScriptCourseHome = () => {
         <thead>
           <tr>
             <th>Lesson</th>
-            <th>Description</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Language</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Lesson 1</td>
-            <td><Link to='/curriculum/javascript/lesson-1'>Introduction to JavaScript</Link></td>
-          </tr>
-          <tr>
-            <td>Lesson 2</td>
-            <td><Link to='/curriculum/javascript/lesson-2'>Function Basics</Link></td>
-          </tr>
-          <tr>
-            <td>Lesson 3</td>
-            <td><Link to='/curriculum/javascript/lesson-3'>Loop and Arrays</Link></td>
-          </tr>
-          <tr>
-            <td>Lesson 4</td>
-            <td><Link to='/curriculum/javascript/lesson-4'>Manipulating the DOM</Link></td>
-          </tr>
+          {lessons.map((lesson) => (
+            <tr key={lesson._id}>
+              <td>{lesson.order}</td>
+              <td><Link to={`/lessons/${lesson._id}`}>{lesson.title}</Link></td>
+              <td>{lesson.author}</td>
+              <td>{lesson.language}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <div>
