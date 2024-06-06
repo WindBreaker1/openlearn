@@ -3,10 +3,10 @@ import { UserContext } from "../../context/userContext";
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import toast from "react-hot-toast";
+import ExpButton from "../components/ExpButton";
 import './Dashboard.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faIdCard, faKey, faLayerGroup, faAsterisk, faPercent, faPersonWalkingArrowRight, faFire, faSnowflake, faTrophy, } from '@fortawesome/free-solid-svg-icons';
-import ExpButton from "../components/ExpButton";
+import { faIdCard, faKey, faLayerGroup, faAsterisk, faPercent, faPersonWalkingArrowRight, faFire, faSnowflake, faTrophy, faSquarePen, faPersonChalkboard, faClipboardQuestion, faTableList } from '@fortawesome/free-solid-svg-icons';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -65,19 +65,19 @@ export default function Dashboard() {
           </div>
           <div className="account-info">
             <p>Add new lessons.</p>
-            <Link to='/add-lesson'><button>Add Lesson</button></Link>
+            <Link to='/add-lesson'><button><FontAwesomeIcon icon={faSquarePen} /> Add Lesson</button></Link>
           </div>
           <div className="account-info">
             <p>View all lessons.</p>
-            <Link to='/admin-lessons'><button>View Lessons</button></Link>
+            <Link to='/admin-lessons'><button><FontAwesomeIcon icon={faPersonChalkboard} /> View Lessons</button></Link>
           </div>
           <div className="account-info">
-            <p>Add daily questions.</p>
-            <Link to='/add-daily'><button>Add Daily Question</button></Link>
+            <p>Add daily exercises.</p>
+            <Link to='/add-daily'><button><FontAwesomeIcon icon={faClipboardQuestion} /> Add Daily Exercises</button></Link>
           </div>
           <div className="account-info">
-            <p>View daily questions.</p>
-            <Link to='/admin-daily'><button>View Daily Questions</button></Link>
+            <p>View daily exercises.</p>
+            <Link to='/admin-daily'><button><FontAwesomeIcon icon={faTableList} /> View Daily Exercises</button></Link>
           </div>
         </div>
       )}

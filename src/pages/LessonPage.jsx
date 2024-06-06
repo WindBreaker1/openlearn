@@ -1,3 +1,4 @@
+import './LessonPage.css';
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
@@ -7,12 +8,15 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ExpButton from '../components/ExpButton';
 import LinkButton from '../components/LinkButton';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCode, faUserPen } from '@fortawesome/free-solid-svg-icons';
 
 export default function LessonPage() {
   const { id } = useParams();
   const {user, lessons, setLessons} = useContext(UserContext);
   const [lesson, setLesson] = useState(null);
-  
+  const [nextLessonId, setNextLessonId] = useState(null);
   
   useEffect(() => {
     const fetchLesson = async () => {
@@ -26,9 +30,19 @@ export default function LessonPage() {
     
     fetchLesson();
   }, [id]);
-  
+
+  useEffect(() => {
+    if (lessons && lesson) {
+      const currentLessonIndex = lessons.findIndex(l => l._id === lesson._id);
+      const nextLesson = lessons[currentLessonIndex + 1];
+      if (nextLesson) {
+        setNextLessonId(nextLesson._id);
+      }
+    }
+  }, [lessons, lesson]);
+
   if (!lesson) {
-    return <div>Loading...</div>;
+    return null;
   }
   
   document.title = `${lesson.title} | OpenLearn`;
@@ -36,9 +50,10 @@ export default function LessonPage() {
   return (
     <div className='page'>
       <h1>{lesson.title}</h1>
-      <hr />
-      <p>Language: {lesson.language}</p>
-      <p>Author: {lesson.author}</p>
+      <div className="lesson-properties">
+        <p><FontAwesomeIcon icon={faCode} /> Language: {lesson.language}</p>
+        <p><FontAwesomeIcon icon={faUserPen} /> Author: {lesson.author}</p>
+      </div>
       <hr />
       <ReactMarkdown 
       components={{
@@ -59,7 +74,7 @@ export default function LessonPage() {
     <div className='button-container'>
         <LinkButton btnLink='/curriculum/javascript' btnText='View Course' />
         {user ? <ExpButton /> : <Link to='/register'><button>Register to Track Progress</button></Link>}
-        <LinkButton btnLink='/curriculum/javascript/lesson-2' btnText='Next Lesson' />
+        <LinkButton btnLink={`/lessons/${nextLessonId}`} btnText='Next Lesson' />
       </div>
     </div>
   );

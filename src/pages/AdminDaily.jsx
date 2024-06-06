@@ -3,9 +3,12 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/userContext';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTableList, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
 
 export default function AdminDaily() {
   const { exercises, setExercises } = useContext(UserContext);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const deleteExercise = async (id) => {
     try {
@@ -18,13 +21,13 @@ export default function AdminDaily() {
     }
   };
 
-  // ...
-
 return (
   <div className='page center-page'>
-    <h1>List of Created Exercises</h1>
+    <h1><FontAwesomeIcon icon={faTableList} /> List of Created Exercises</h1>
     <p>This is a list of your created exercises.</p>
-    <p>If you want to add a new one go <Link to='/add-daily'>here</Link>.</p>
+    <input style={{width: '500px'}} type="text" placeholder="Search Exercises..." onChange={event => setSearchTerm(event.target.value)} />
+    <br />
+    <Link to='/add-daily'><button><FontAwesomeIcon icon={faPlus} /> Add New Exercise</button></Link>
     <table>
       <thead>
         <tr>
@@ -35,20 +38,18 @@ return (
         </tr>
       </thead>
       <tbody>
-        {exercises.map((exercise) => (
+        {exercises.filter(exercise => exercise.questionText.toLowerCase().includes(searchTerm.toLowerCase())).map((exercise) => (
           <tr key={exercise._id}>
-            <td>{exercise.questionText}</td>
+            <td style={{ maxWidth: '300px' }}>{exercise.questionText}</td>
             <td>{exercise.userInput}</td>
             <td>{exercise.answer}</td>
             <td>
-              <button className='delete-button' onClick={() => deleteExercise(exercise._id)}>Delete</button>
+              <button className='delete-button' onClick={() => deleteExercise(exercise._id)}><FontAwesomeIcon icon={faTrash} /> Delete</button>
             </td>
           </tr>
         ))}
       </tbody>
     </table>
   </div>
-);
-
-// ...
+  );
 };

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClipboardQuestion, faExpand, faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons"
 
 export default function AddDaily() {
   const [questionText, setQuestionText] = useState('');
@@ -24,12 +26,14 @@ export default function AddDaily() {
 
   return (
     <div className='page center-page'>
-      <h1>Add Daily Exercise</h1>
+      <h1><FontAwesomeIcon icon={faClipboardQuestion} /> Add Daily Exercise</h1>
       <p>Use this form to add a new daily exercise.</p>
-      <p>If you want to see your created exercises go <Link to='/admin-daily'>here</Link>.</p>
+      <Link to='/admin-daily'><button><FontAwesomeIcon icon={faExpand} /> See All Exercises</button></Link>
+      <br />
       <form className='general-survey-form' onSubmit={handleSubmit}>
         <label>Question Text: </label>
         <textarea
+          style={{ width: '550px', height: '100px' }} 
           value={questionText}
           onChange={(e) => setQuestionText(e.target.value)}
           placeholder='Question...'
@@ -38,7 +42,7 @@ export default function AddDaily() {
         <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder='Input...' />
         <label>Answer:</label>
         <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)}  placeholder='Answer...' />
-        <button type="submit">Submit</button>
+        <button type="submit"><FontAwesomeIcon icon={faArrowRightToBracket} /> Submit</button>
       </form>
     </div>
   );

@@ -31,7 +31,14 @@ export default function Leaderboard() {
         </thead>
         <tbody>
           {users.map((user, index) => (
-            <tr key={user._id}>
+            <tr 
+              key={user._id}
+              className={
+                index === 0 ? 'highlight-gold' : 
+                index === 1 ? 'highlight-silver' : 
+                index === 2 ? 'highlight-bronze' : ''
+              }
+            >
               <td>{index + 1}</td>
               <td>{user.name}</td>
               <td>{user.experience}</td>
