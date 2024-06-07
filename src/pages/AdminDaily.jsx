@@ -32,6 +32,7 @@ return (
       <thead>
         <tr>
           <th>Question</th>
+          <th>Language</th>
           <th>Input Type</th>
           <th>Answer</th>
           <th>Action</th>
@@ -41,6 +42,7 @@ return (
         {exercises.filter(exercise => exercise.questionText.toLowerCase().includes(searchTerm.toLowerCase())).map((exercise) => (
           <tr key={exercise._id}>
             <td style={{ maxWidth: '300px' }}>{exercise.questionText}</td>
+            <td>{exercise.language}</td>
             <td>{exercise.userInput}</td>
             <td>{exercise.answer}</td>
             <td>

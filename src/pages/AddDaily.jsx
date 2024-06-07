@@ -7,6 +7,7 @@ import { faClipboardQuestion, faExpand, faArrowRightToBracket } from "@fortaweso
 
 export default function AddDaily() {
   const [questionText, setQuestionText] = useState('');
+  const [language, setLanguage] = useState('');
   const [userInput, setUserInput] = useState('');
   const [answer, setAnswer] = useState('');
 
@@ -14,9 +15,10 @@ export default function AddDaily() {
     event.preventDefault();
 
     try {
-      await axios.post('/addDailyExercise', { questionText, userInput, answer });
+      await axios.post('/addDailyExercise', { questionText, language, userInput, answer });
       toast.success('Daily exercise added successfully!');
       setQuestionText('');
+      setLanguage('');
       setUserInput('');
       setAnswer('');
     } catch (error) {
@@ -38,8 +40,31 @@ export default function AddDaily() {
           onChange={(e) => setQuestionText(e.target.value)}
           placeholder='Question...'
         />
+        <label>Language/Framework:</label>
+        <select id="language" name="language" value={language} onChange={(e) => setLanguage(e.target.value)}>
+          <option value="" disabled>Select a language</option>
+          <option value="Python">Python</option>
+          <option value="C/C++">C/C++</option>
+          <option value="Java">Java</option>
+          <option value="Unity/C#">Unity/C#</option>
+          <option value="HTML">HTML</option>
+          <option value="CSS">CSS</option>
+          <option value="JavaScript">JavaScript</option>
+          <option value="React">React</option>
+          <option value="SQL">SQL</option>
+          <option value="PHP">PHP</option>
+          <option value="Ruby">Ruby</option>
+          <option value="Swift">Swift</option>
+          <option value="Rust">Rust</option>
+          <option value="Kotlin">Kotlin</option>
+          <option value="Go/Golang">Go/Golang</option>
+          <option value="Other">Other</option>
+        </select>
         <label>User Input Type:</label>
-        <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder='Input...' />
+        <select name="input" id="input" value={userInput} onChange={(e) => setUserInput(e.target.value)}>
+          <option value="" disabled>Select an Input Form</option>
+          <option value="Text">Text</option>
+        </select>
         <label>Answer:</label>
         <input type="text" value={answer} onChange={(e) => setAnswer(e.target.value)}  placeholder='Answer...' />
         <button type="submit"><FontAwesomeIcon icon={faArrowRightToBracket} /> Submit</button>

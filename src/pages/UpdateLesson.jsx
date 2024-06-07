@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Link, useParams } from 'react-router-dom';
@@ -43,8 +43,26 @@ export default function UpdateLesson() {
         <input type="text" name="title" defaultValue={lesson.title} required />
         <label>Author:</label>
         <input type="text" name="author" defaultValue={lesson.author} required />
-        <label>Language:</label>
-        <input type="text" name="language" defaultValue={lesson.language} required />
+        <label>Language/Framework:</label>
+        <select id="language" name="language" defaultValue={lesson.language}>
+          <option value="" disabled>Select a language</option>
+          <option value="Python">Python</option>
+          <option value="C/C++">C/C++</option>
+          <option value="Java">Java</option>
+          <option value="Unity/C#">Unity/C#</option>
+          <option value="HTML">HTML</option>
+          <option value="CSS">CSS</option>
+          <option value="JavaScript">JavaScript</option>
+          <option value="React">React</option>
+          <option value="SQL">SQL</option>
+          <option value="PHP">PHP</option>
+          <option value="Ruby">Ruby</option>
+          <option value="Swift">Swift</option>
+          <option value="Rust">Rust</option>
+          <option value="Kotlin">Kotlin</option>
+          <option value="Go/Golang">Go/Golang</option>
+          <option value="Other">Other</option>
+        </select>
         <label>Order in Course:</label>
         <input type="number" name="order" defaultValue={lesson.order} required />
         <label>Content:</label>

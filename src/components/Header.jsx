@@ -37,7 +37,7 @@ export default function Header() {
             <li><Link to='/leaderboard'>Leaderboard</Link></li>
             <li>
               <div>
-                <Link className={`user-component-column ${user.rank.toLowerCase()}-rank`}to='/dashboard'>
+                <Link className={`user-component-column ${user.rank ? user.rank.toLowerCase() : ''}-rank`} to='/dashboard'>
                   <div className='user-component-row'>
                     <div>{user.name}</div>
                     <div>Level: {user.level}</div>

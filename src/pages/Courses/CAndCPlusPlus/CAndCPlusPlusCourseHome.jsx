@@ -1,9 +1,28 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faC } from "@fortawesome/free-solid-svg-icons"
 import { Link } from 'react-router-dom';
 
 const CAndCPlusPlusCourseHome = () => {
   document.title = 'C & C++ Course';
+
+  const [lessons, setLessons] = useState([]);
+  
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        const response = await axios.get('/getLessons');
+        const CLessons = response.data
+          .filter(lesson => lesson.language === 'C/C++')
+          .sort((a, b) => a.order - b.order);
+        setLessons(CLessons);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLessons();
+  }, []);
   
   return (
     <div className='page'>
@@ -14,9 +33,28 @@ const CAndCPlusPlusCourseHome = () => {
       <p>
         C++ is an extension of the C language, with enhancements such as classes and objects, making it a key player in the object-oriented programming (OOP) world. It's commonly used for system/software development, game development, and in other high-performance scenarios. It offers a combination of high-level and low-level language features.
       </p>
-      <p>
-        We currently don't have any lessons for this course, but the resources below should be more than enough to get you from beginner to expert!
-      </p>
+      <h2>Lessons</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Lesson</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Language</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lessons.map((lesson) => (
+            <tr key={lesson._id}>
+              <td>{lesson.order}</td>
+              <td><Link to={`/lessons/${lesson._id}`}>{lesson.title}</Link></td>
+              <td>{lesson.author}</td>
+              <td>{lesson.language}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h2>Resources</h2>
       <table>
         <thead>
           <tr>

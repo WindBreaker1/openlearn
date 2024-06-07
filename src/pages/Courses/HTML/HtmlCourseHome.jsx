@@ -1,9 +1,28 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHtml5 } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const HtmlCourseHome = () => {
   document.title = 'HTML Course';
+
+  const [lessons, setLessons] = useState([]);
+  
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        const response = await axios.get('/getLessons');
+        const htmlLessons = response.data
+          .filter(lesson => lesson.language === 'HTML')
+          .sort((a, b) => a.order - b.order);
+        setLessons(htmlLessons);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLessons();
+  }, []);
 
   return (
     <div className='page'>
@@ -14,9 +33,28 @@ const HtmlCourseHome = () => {
       <p>
         HTML structures the content on the web page and uses tags to denote different types of content, such as headings, paragraphs, links, images, and more. It's an essential skill for anyone interested in web development.
       </p>
-      <p>
-        We currently don't have any lessons for this course, but the resources below should be more than enough to get you from beginner to expert!
-      </p>
+      <h2>Lessons</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Lesson</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Language</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lessons.map((lesson) => (
+            <tr key={lesson._id}>
+              <td>{lesson.order}</td>
+              <td><Link to={`/lessons/${lesson._id}`}>{lesson.title}</Link></td>
+              <td>{lesson.author}</td>
+              <td>{lesson.language}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h2>Resources</h2>
       <table>
         <thead>
           <tr>

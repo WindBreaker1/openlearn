@@ -2,9 +2,9 @@ import './Curriculum.css';
 import { Link } from 'react-router-dom';
 import { Card } from "../components/Card"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faC, faDatabase, faGem } from "@fortawesome/free-solid-svg-icons"
+import { faC, faDatabase, faGem, faBlog, faArrowRightToBracket } from "@fortawesome/free-solid-svg-icons"
 import { faPython, faJava, faUnity, faJs, faHtml5, faCss3Alt, 
-  faPhp, faReact, faSwift, faRust, faKorvue, faGolang, 
+  faPhp, faReact, faSwift, faRust, faKorvue, faGolang,
 } from "@fortawesome/free-brands-svg-icons"
 
 export default function Curriculum() {
@@ -32,6 +32,7 @@ export default function Curriculum() {
   const cardRust = new CurriculumCard('Rust', <FontAwesomeIcon icon={faRust} style={{color: "#5f6167",}} />);
   const cardKotlin = new CurriculumCard('Kotlin', <FontAwesomeIcon icon={faKorvue} style={{color: "#c77ee2",}} />);
   const cardGo = new CurriculumCard('Go/Golang', <FontAwesomeIcon icon={faGolang} style={{color: "#42a5f0",}} />);
+  const cardOther = new CurriculumCard('Other', <FontAwesomeIcon icon={faBlog} />);
 
   return (
     <div className='curriculum-page'>
@@ -72,6 +73,7 @@ export default function Curriculum() {
         <Link to='/curriculum/rust'><Card icon={cardRust.icon} title={cardRust.title} /></Link>
         <Link to='/curriculum/kotlin'><Card icon={cardKotlin.icon} title={cardKotlin.title} /></Link>
         <Link to='/curriculum/go'><Card icon={cardGo.icon} title={cardGo.title} /></Link>
+        <Link to='/curriculum/other'><Card icon={cardOther.icon} title={cardOther.title} /></Link>
       </div>
     </div>
   )

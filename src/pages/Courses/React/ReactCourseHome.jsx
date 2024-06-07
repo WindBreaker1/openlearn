@@ -1,9 +1,29 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReact } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ReactCourseHome = () => {
   document.title = 'React Course';
+
+  const [lessons, setLessons] = useState([]);
+  
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        const response = await axios.get('/getLessons');
+        const reactLessons = response.data
+          .filter(lesson => lesson.language === 'React')
+          .sort((a, b) => a.order - b.order);
+        setLessons(reactLessons);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLessons();
+  }, []);
+
   
   return (
     <div className='page'>
@@ -14,9 +34,28 @@ const ReactCourseHome = () => {
       <p>
         It's known for its component-based architecture, virtual DOM, and efficient diffing algorithm for fast rendering. React was developed by Facebook and is maintained by Facebook and a community of individual developers and companies.
       </p>
-      <p>
-        We currently don't have any lessons for this course, but the resources below should be more than enough to get you from beginner to expert!
-      </p>
+      <h2>Lessons</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Lesson</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Language</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lessons.map((lesson) => (
+            <tr key={lesson._id}>
+              <td>{lesson.order}</td>
+              <td><Link to={`/lessons/${lesson._id}`}>{lesson.title}</Link></td>
+              <td>{lesson.author}</td>
+              <td>{lesson.language}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h2>Resources</h2>
       <table>
         <thead>
           <tr>

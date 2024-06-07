@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBlog } from "@fortawesome/free-solid-svg-icons"
 import { faJs } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
-const JavaScriptCourseHome = () => {
-  document.title = 'JavaScript Course';
+const OtherCourseHome = () => {
+  document.title = 'Other Courses';
 
   const [lessons, setLessons] = useState([]);
   
@@ -14,10 +15,10 @@ const JavaScriptCourseHome = () => {
     const fetchLessons = async () => {
       try {
         const response = await axios.get('/getLessons');
-        const jsLessons = response.data
-          .filter(lesson => lesson.language === 'JavaScript')
+        const otherLessons = response.data
+          .filter(lesson => lesson.language === 'Other')
           .sort((a, b) => a.order - b.order);
-        setLessons(jsLessons);
+        setLessons(otherLessons);
       } catch (error) {
         console.error(error);
       }
@@ -28,21 +29,9 @@ const JavaScriptCourseHome = () => {
   return (
     <div className='page'>
       {/* introduction */}
-      <h1><FontAwesomeIcon icon={faJs} style={{color: "#FFD43B",}} /> Welcome to the JavaScript course!</h1>
+      <h1><FontAwesomeIcon icon={faBlog} /> Welcome to our other lessons!</h1>
       <p>
-        JavaScript is a high-level, interpreted programming language primarily used for enhancing web pages to provide for a more user interactive experience. It allows for dynamic interactivity on websites when applied to an HTML document.
-      </p>
-      <p>
-        JavaScript supports multiple programming paradigms including procedural, object-oriented, and functional programming. It's known for its usage in web frameworks like React, Angular, and Vue.js.
-      </p>
-      <p>
-        This course will help you learn everything you need to become
-        a JavaScript master!
-      </p>
-      <p>
-        It includes projects and exercises where you will learn how to 
-        manipulate the DOM, use object-oriented programming principles, 
-        and fetch real-world data using APIs.
+        This section contains courses that don't fit into the other categories. They are a mix of different topics and languages, so feel free to explore and learn something new!
       </p>
       {/* list of lessons */}
       <h2>Lessons</h2>
@@ -73,4 +62,4 @@ const JavaScriptCourseHome = () => {
   )
 }
 
-export default JavaScriptCourseHome;
+export default OtherCourseHome;

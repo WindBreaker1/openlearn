@@ -1,9 +1,28 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGem } from "@fortawesome/free-solid-svg-icons"
 import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const RubyCourseHome = () => {
   document.title = 'Ruby Course';
+
+  const [lessons, setLessons] = useState([]);
+  
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        const response = await axios.get('/getLessons');
+        const rubyLessons = response.data
+          .filter(lesson => lesson.language === 'Ruby')
+          .sort((a, b) => a.order - b.order);
+        setLessons(rubyLessons);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLessons();
+  }, []);
   
   return (
     <div className='page'>
@@ -14,9 +33,28 @@ const RubyCourseHome = () => {
       <p>
         Ruby is a high-level programming language that is most commonly used for web development. It is known for its simplicity and flexibility, making it a great language for beginners to learn.
       </p>
-      <p>
-        We currently don't have any lessons for this course, but the resources below should be more than enough to get you from beginner to expert!
-      </p>
+      <h2>Lessons</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Lesson</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Language</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lessons.map((lesson) => (
+            <tr key={lesson._id}>
+              <td>{lesson.order}</td>
+              <td><Link to={`/lessons/${lesson._id}`}>{lesson.title}</Link></td>
+              <td>{lesson.author}</td>
+              <td>{lesson.language}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h2>Resources</h2>
       <table>
         <thead>
           <tr>

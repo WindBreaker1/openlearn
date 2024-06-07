@@ -1,9 +1,28 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCss3Alt } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const CssCourseHome = () => {
   document.title = 'CSS Course';
+
+  const [lessons, setLessons] = useState([]);
+  
+  useEffect(() => {
+    const fetchLessons = async () => {
+      try {
+        const response = await axios.get('/getLessons');
+        const CSSLessons = response.data
+          .filter(lesson => lesson.language === 'CSS')
+          .sort((a, b) => a.order - b.order);
+        setLessons(CSSLessons);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchLessons();
+  }, []);
   
   return (
     <div className='page'>
@@ -14,9 +33,28 @@ const CssCourseHome = () => {
       <p>
         CSS is used to control layout of web pages, including colors, fonts, and the design of the overall webpage. It allows one to adapt the presentation to different types of devices, such as large screens, small screens, or printers.
       </p>
-      <p>
-        We currently don't have any lessons for this course, but the resources below should be more than enough to get you from beginner to expert!
-      </p>
+      <h2>Lessons</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Lesson</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Language</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lessons.map((lesson) => (
+            <tr key={lesson._id}>
+              <td>{lesson.order}</td>
+              <td><Link to={`/lessons/${lesson._id}`}>{lesson.title}</Link></td>
+              <td>{lesson.author}</td>
+              <td>{lesson.language}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h2>Resources</h2>
       <table>
         <thead>
           <tr>

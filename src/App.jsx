@@ -48,6 +48,7 @@ import SwiftCourseHome from './pages/Courses/Swift/SwiftCourseHome'
 import RustCourseHome from './pages/Courses/Rust/RustCourseHome'
 import KotlinCourseHome from './pages/Courses/Kotlin/KotlinCourseHome'
 import GoCourseHome from './pages/Courses/Go/GoCourseHome'
+import OtherCourseHome from './pages/Courses/Other/OtherCourseHome'
 
 // ============================= APP COMPONENT =============================== //
 
@@ -107,6 +108,7 @@ function App() {
           <Route path='/curriculum/rust' element={<RustCourseHome />} />
           <Route path='/curriculum/kotlin' element={<KotlinCourseHome />} />
           <Route path='/curriculum/go' element={<GoCourseHome />} />
+          <Route path='/curriculum/other' element={<OtherCourseHome />} />
         </Routes>
         <Footer />
       </UserContextProvider>
