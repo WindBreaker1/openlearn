@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/userContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTableList, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faTableList, faPlus, faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 
 export default function AdminDaily() {
   const { exercises, setExercises } = useContext(UserContext);
@@ -28,25 +28,28 @@ return (
     <input style={{width: '500px'}} type="text" placeholder="Search Exercises..." onChange={event => setSearchTerm(event.target.value)} />
     <br />
     <Link to='/add-daily'><button><FontAwesomeIcon icon={faPlus} /> Add New Exercise</button></Link>
-    <table>
+    <table className='wide-table'>
       <thead>
         <tr>
           <th>Question</th>
           <th>Language</th>
           <th>Input Type</th>
           <th>Answer</th>
-          <th>Action</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        {exercises.filter(exercise => exercise.questionText.toLowerCase().includes(searchTerm.toLowerCase())).map((exercise) => (
+        {exercises.filter(exercise => exercise.questionTitle.toLowerCase().includes(searchTerm.toLowerCase())).map((exercise) => (
           <tr key={exercise._id}>
-            <td style={{ maxWidth: '300px' }}>{exercise.questionText}</td>
+            <td>{exercise.questionTitle}</td>
             <td>{exercise.language}</td>
             <td>{exercise.userInput}</td>
             <td>{exercise.answer}</td>
-            <td>
-              <button className='delete-button' onClick={() => deleteExercise(exercise._id)}><FontAwesomeIcon icon={faTrash} /> Delete</button>
+            <td className='button-container-no-margin'>
+              <Link to={`/update-daily/${exercise._id}`}><button className='update-button'> Update</button></Link>
+              <div>
+                <button className='delete-button' onClick={() => deleteExercise(exercise._id)}> Delete</button>
+              </div>
             </td>
           </tr>
         ))}

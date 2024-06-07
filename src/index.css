@@ -227,6 +227,9 @@ code {
   flex-direction: row;
   justify-content: space-evenly;
   gap: 10px;
+  width: auto;
+  height: auto;
+  padding: 30px 10px;
 }
 
 /* responsive stuff */

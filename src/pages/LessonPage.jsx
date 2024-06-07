@@ -66,7 +66,10 @@ export default function LessonPage() {
               {children}
             </code>
           )
-        }
+        },
+        img({node, ...props}) {
+          return <img {...props} style={{width: '400px'}} />
+        },
       }}
     >
       {lesson.content}

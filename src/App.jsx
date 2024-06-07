@@ -25,6 +25,7 @@ import Curriculum from './pages/Curriculum'
 import Survey from './pages/Survey'
 import DailyExercise from './pages/DailyExercise'
 import AddDaily from './pages/AddDaily'
+import UpdateDaily from './pages/UpdateDaily'
 import AdminDaily from './pages/AdminDaily'
 import AddLesson from './pages/AddLesson'
 import UpdateLesson from './pages/UpdateLesson'
@@ -85,6 +86,7 @@ function App() {
           <Route path='/survey' element={<Survey />} />
           <Route path='/daily-exercise' element={<DailyExercise />} />
           <Route path='/add-daily' element={<AddDaily />} />
+          <Route path='/update-daily/:id' element={<UpdateDaily />} />
           <Route path='/admin-daily' element={<AdminDaily />} />
           <Route path='/add-lesson' element={<AddLesson />} />
           <Route path='/update-lesson/:id' element={<UpdateLesson />} />
