@@ -9,6 +9,11 @@
   max-height: 300px;
   min-width: 300px;
   max-width: 300px;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }
 
 .card-icon {

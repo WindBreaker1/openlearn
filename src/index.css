@@ -50,10 +50,11 @@ button {
   font-family: inherit;
   background-color: #2b5ca9;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.25s;
 }
 button:hover {
   background-color: #1c3b6e;
+  transform: translateY(-2px);
 }
 button:focus {
   outline: 4px auto -webkit-focus-ring-color;
@@ -79,6 +80,11 @@ select {
   font-family: inherit;
   cursor: pointer;
 }
+
+option {
+  font-size: 1em;
+  font-family: inherit;
+} 
 
 hr {
   border: none;
